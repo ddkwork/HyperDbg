@@ -1,9 +1,10 @@
 package ui
 
 import (
+	"iter"
+
 	"gioui.org/layout"
 	"github.com/ddkwork/ux"
-	"iter"
 )
 
 func NewSymbol() ux.Widget {
@@ -11,13 +12,10 @@ func NewSymbol() ux.Widget {
 	t.TableContext = ux.TableContext[Symbol]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[Symbol]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[Symbol]) (cells []ux.CellData) {
-
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -37,10 +35,8 @@ func NewSymbol() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			for range 100 {

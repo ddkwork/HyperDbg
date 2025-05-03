@@ -12,7 +12,6 @@ func NewBreak() ux.Widget {
 	t.TableContext = ux.TableContext[Break]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[Break]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[Break]) (cells []ux.CellData) {
@@ -29,7 +28,6 @@ func NewBreak() ux.Widget {
 			//	{Text: n.Data.Summary},
 			// }
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -39,10 +37,8 @@ func NewBreak() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			for i := range 100 {

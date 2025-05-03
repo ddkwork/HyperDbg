@@ -24,7 +24,6 @@ var bar embed.FS
 var pageIco embed.FS
 
 func Run() {
-
 	w := ux.NewWindow("hyperdbg")
 	panel := ux.NewPanel(w)
 

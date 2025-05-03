@@ -1,9 +1,10 @@
 package ui
 
 import (
+	"iter"
+
 	"gioui.org/layout"
 	"github.com/ddkwork/ux"
-	"iter"
 )
 
 type Memory struct {
@@ -21,7 +22,6 @@ func NewMemory() ux.Widget {
 	t.TableContext = ux.TableContext[Memory]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[Memory]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[Memory]) (cells []ux.CellData) {
@@ -38,7 +38,6 @@ func NewMemory() ux.Widget {
 			//	{Text: n.Data.InitialProtection},
 			// }
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -48,10 +47,8 @@ func NewMemory() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			for i := range 100 {

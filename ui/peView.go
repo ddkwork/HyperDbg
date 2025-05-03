@@ -24,13 +24,10 @@ func NewPeView() ux.Widget {
 	t.TableContext = ux.TableContext[PeView]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[PeView]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[PeView]) (cells []ux.CellData) {
-
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -50,10 +47,8 @@ func NewPeView() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			const (

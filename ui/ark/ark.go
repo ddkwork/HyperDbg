@@ -41,13 +41,10 @@ func New() ux.Widget {
 	t.TableContext = ux.TableContext[ark]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[ark]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[ark]) (cells []ux.CellData) {
-
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -63,10 +60,8 @@ func New() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			for _, kind := range KernelTablesType.EnumTypes() {
@@ -87,7 +82,6 @@ func New() ux.Widget {
 		t.TableContext = ux.TableContext[ddk.NtApi]{
 			CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[ddk.NtApi]) iter.Seq[ux.ContextMenuItem] {
 				return func(yield func(ux.ContextMenuItem) bool) {
-
 				}
 			},
 			MarshalRowCells: func(n *ux.Node[ddk.NtApi]) (cells []ux.CellData) {
@@ -103,7 +97,6 @@ func New() ux.Widget {
 				//	{Text: stream.FormatInteger(n.Data.Index)},
 				// }
 				return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 					return ""
 				})
 			},
@@ -134,7 +127,6 @@ func New() ux.Widget {
 				}
 			},
 			RowDoubleClickCallback: func() {
-
 			},
 			SetRootRowsCallBack: func() {
 				sysCall := ddk.NewSysCall(int64(sdk.GetKernelBase()))

@@ -75,7 +75,6 @@ func NewCpu() *Cpu {
 }
 
 func (c *Cpu) Layout(gtx layout.Context) layout.Dimensions {
-
 	return c.sp.Layout(gtx)
 }
 
@@ -1014,7 +1013,6 @@ func LayoutDisassemblyTable() ux.Widget {
 			mylog.Struct(t.SelectedNode.Data)
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			f := xed.ParserPe(TargetExePath)
@@ -1171,7 +1169,6 @@ func LayoutStackTable() ux.Widget {
 	t.TableContext = ux.TableContext[Stack]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[Stack]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[Stack]) (cells []ux.CellData) {
@@ -1195,10 +1192,8 @@ func LayoutStackTable() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			for i := 0; i < len(stackMock); i++ {

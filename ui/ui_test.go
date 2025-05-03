@@ -25,7 +25,6 @@ func TestGenTab(t *testing.T) {
 		yield("handle", "handle")
 		yield("trace", "trace")
 		yield("ark", "ark")
-
 	})
 	stream.NewGeneratedFile().SetPackageName("ui").EnumTypes("tabPage", m)
 }

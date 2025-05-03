@@ -1,9 +1,10 @@
 package ui
 
 import (
+	"iter"
+
 	"gioui.org/layout"
 	"github.com/ddkwork/ux"
-	"iter"
 )
 
 func LayoutDoc() ux.Widget {
@@ -19,13 +20,10 @@ func LayoutDoc() ux.Widget {
 	t.TableContext = ux.TableContext[doc]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[doc]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[doc]) (cells []ux.CellData) {
-
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -44,10 +42,8 @@ func LayoutDoc() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			// 分类

@@ -46,9 +46,6 @@ jobs:
 # Additionally, currently only bin sums from builds on the dev branch will allow HyperDbg builds to succeed
 
 
-#    - name: Run tests for auto bind sdk
-#      run: go test ./...
-#
 #    - name: Build the project
 #      run: go build -x .
 #      pack HyperDbg.exe to HyperDbg.zip

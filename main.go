@@ -13,7 +13,6 @@ func main() {
 	// testDisassembly()
 	// testParsePe()
 	// testScript()
-
 }
 
 func testSdkCommands() {

@@ -1,10 +1,11 @@
 package ui
 
 import (
-	"gioui.org/layout"
-	"github.com/ddkwork/ux"
 	"iter"
 	"time"
+
+	"gioui.org/layout"
+	"github.com/ddkwork/ux"
 )
 
 func NewThread() ux.Widget {
@@ -12,13 +13,10 @@ func NewThread() ux.Widget {
 	t.TableContext = ux.TableContext[Thread]{
 		CustomContextMenuItems: func(gtx layout.Context, n *ux.Node[Thread]) iter.Seq[ux.ContextMenuItem] {
 			return func(yield func(ux.ContextMenuItem) bool) {
-
 			}
 		},
 		MarshalRowCells: func(n *ux.Node[Thread]) (cells []ux.CellData) {
-
 			return ux.MarshalRow(n.Data, func(key string, field any) (value string) {
-
 				return ""
 			})
 		},
@@ -46,10 +44,8 @@ func NewThread() ux.Widget {
 			})
 		},
 		RowSelectedCallback: func() {
-
 		},
 		RowDoubleClickCallback: func() {
-
 		},
 		SetRootRowsCallBack: func() {
 			for range 100 {
