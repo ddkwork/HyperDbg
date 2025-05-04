@@ -21,29 +21,29 @@ import (
 )
 
 type Cpu struct {
-	asmAndImmData *ux.Split
-	spTop         *ux.Split
-	spBottom      *ux.Split
-	sp            *ux.Split
+	asmAndImmData ux.Split
+	spTop         ux.Split
+	spBottom      ux.Split
+	sp            ux.Split
 }
 
 func NewCpu() *Cpu {
-	asmAndImmData := ux.NewSplit(ux.Split{
+	asmAndImmData := ux.Split{
 		Ratio:  0.85, // 布局比例，0 表示居中，-1 表示完全靠左，1 表示完全靠右
 		Bar:    10,
 		Axis:   layout.Vertical,
 		First:  LayoutDisassemblyTable().Layout, // left 表格
 		Second: NewImm().Layout,                 // right 寄存器 todo
-	})
+	}
 
-	spTop := ux.NewSplit(ux.Split{
+	spTop := ux.Split{
 		Ratio:  0.3, // 布局比例，0 表示居中，-1 表示完全靠左，1 表示完全靠右
 		Bar:    10,
 		Axis:   layout.Horizontal,
 		First:  asmAndImmData.Layout,    // left 表格
 		Second: LayoutRegister().Layout, // right 寄存器 todo
-	})
-	spBottom := ux.NewSplit(ux.Split{
+	}
+	spBottom := ux.Split{
 		Ratio: 0.2, // 布局比例，0 表示居中，-1 表示完全靠左，1 表示完全靠右
 		Bar:   10,
 		Axis:  layout.Horizontal,
@@ -57,15 +57,15 @@ func NewCpu() *Cpu {
 		//	tabs.NewTab("struct")
 		First:  ux.NewCodeEditor(hex.Dump(testHexDat), languages.GoKind).Layout, // left memory editor todo https://github.com/itchyny/bed
 		Second: LayoutStackTable().Layout,                                       // right stack
-	})
+	}
 
-	sp := ux.NewSplit(ux.Split{
+	sp := ux.Split{
 		Ratio:  0.4, // 布局比例，0 表示居中，-1 表示完全靠左，1 表示完全靠右
 		Bar:    10,
 		Axis:   layout.Vertical,
 		First:  spTop.Layout,    //
 		Second: spBottom.Layout, //
-	})
+	}
 	return &Cpu{
 		asmAndImmData: asmAndImmData,
 		spTop:         spTop,
