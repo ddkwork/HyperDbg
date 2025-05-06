@@ -4,10 +4,10 @@ go 1.24.1
 
 require (
 	gioui.org v0.8.1-0.20250505174639-f73287be870d
-	github.com/ddkwork/bindgen v0.0.0-20250504062156-98bf32a438fb
-	github.com/ddkwork/ddk v0.0.0-20250504140520-a2070396e611
+	github.com/ddkwork/bindgen v0.0.0-20250506101823-54c9c459ff83
+	github.com/ddkwork/ddk v0.0.0-20250506101835-7e5c7a057c89
 	github.com/ddkwork/golibrary v0.1.2-0.20250505042507-fb65953b7361
-	github.com/ddkwork/ux v0.0.0-20250506013917-14700c8ac6d8
+	github.com/ddkwork/ux v0.0.0-20250506101838-502688e1a931
 	github.com/ebitengine/purego v0.9.0-alpha.3
 	github.com/saferwall/pe v1.5.6
 	github.com/winlabs/gowin32 v0.0.0-20240930213947-f504d7e14639
