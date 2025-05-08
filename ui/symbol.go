@@ -19,7 +19,7 @@ func NewSymbol() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[Symbol], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[Symbol], rows []ux.CellData) Symbol {
 			if n.Container() {
 				n.SumChildren()
 			}
@@ -30,7 +30,7 @@ func NewSymbol() ux.Widget {
 			//	{Text: n.Data.Path},
 			//	{Text: fmt.Sprintf("%016X", n.Data.Address)},
 			// }
-			n.Data = ux.UnmarshalRow[Symbol](rows, func(key, value string) (field any) {
+			return ux.UnmarshalRow[Symbol](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

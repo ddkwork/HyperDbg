@@ -19,7 +19,7 @@ func NewSeh() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[Seh], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[Seh], rows []ux.CellData) Seh {
 			if n.Container() {
 				n.SumChildren()
 			}
@@ -29,7 +29,7 @@ func NewSeh() ux.Widget {
 			//	{Text: n.Data.Label},
 			//	{Text: n.Data.Notes},
 			// }
-			n.Data = ux.UnmarshalRow[Seh](rows, func(key, value string) (field any) {
+			return ux.UnmarshalRow[Seh](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

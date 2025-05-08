@@ -48,14 +48,14 @@ func New() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[ark], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[ark], rows []ux.CellData) ark {
 			name := n.Data.Name.String()
 			if n.Container() {
 				name = n.SumChildren()
 			}
 			name = name // todo
 			// return []ux.CellData{{Text: name}}
-			n.Data = ux.UnmarshalRow[ark](rows, func(key, value string) (field any) {
+			return ux.UnmarshalRow[ark](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},
@@ -100,8 +100,8 @@ func New() ux.Widget {
 					return ""
 				})
 			},
-			UnmarshalRowCells: func(n *ux.Node[ddk.NtApi], rows []ux.CellData) {
-				n.Data = ux.UnmarshalRow[ddk.NtApi](rows, func(key, value string) (field any) {
+			UnmarshalRowCells: func(n *ux.Node[ddk.NtApi], rows []ux.CellData) ddk.NtApi {
+				return ux.UnmarshalRow[ddk.NtApi](rows, func(key, value string) (field any) {
 					return nil
 				})
 			},

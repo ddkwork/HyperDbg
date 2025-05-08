@@ -998,8 +998,8 @@ func LayoutDisassemblyTable() ux.Widget {
 			}
 			return cells
 		},
-		UnmarshalRowCells: func(n *ux.Node[xed.Disassembly], rows []ux.CellData) {
-			n.Data = ux.UnmarshalRow[xed.Disassembly](rows, func(key, value string) (field any) {
+		UnmarshalRowCells: func(n *ux.Node[xed.Disassembly], rows []ux.CellData) xed.Disassembly {
+			return ux.UnmarshalRow[xed.Disassembly](rows, func(key, value string) (field any) {
 				switch key {
 				case "Address":
 					return mylog.Check2(strconv.ParseUint(value, 16, 64))
@@ -1149,7 +1149,6 @@ func LayoutDisassemblyTable() ux.Widget {
 	//		mylog.Info("dropped file: ", TargetExePath)
 	//		table.ResetChildren()
 	//		SetRootRowsCallBack(table)
-	//		table.SyncToModel()
 	//	default:
 	//		mylog.Check(TargetExePath + " is not a valid file type")
 	//	}
@@ -1186,8 +1185,8 @@ func LayoutStackTable() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[Stack], rows []ux.CellData) {
-			n.Data = ux.UnmarshalRow[Stack](rows, func(key, value string) (field any) {
+		UnmarshalRowCells: func(n *ux.Node[Stack], rows []ux.CellData) Stack {
+			return ux.UnmarshalRow[Stack](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

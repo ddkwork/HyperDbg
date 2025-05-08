@@ -27,17 +27,17 @@ func LayoutDoc() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[doc], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[doc], rows []ux.CellData) doc {
 			if n.Container() {
 				n.SumChildren()
 			}
-			//return []ux.CellData{
+			// return []ux.CellData{
 			//	{Text: n.Data.Function},
 			//	{Text: n.Data.Description},
 			//	{Text: fmt.Sprintf("%t", n.Data.Implement)},
 			//	{Text: n.Data.DemoLink},
-			//}
-			n.Data = ux.UnmarshalRow[doc](rows, func(key, value string) (field any) {
+			// }
+			return ux.UnmarshalRow[doc](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

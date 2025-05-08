@@ -31,8 +31,8 @@ func NewBreak() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[Break], rows []ux.CellData) {
-			n.Data = ux.UnmarshalRow[Break](rows, func(key, value string) (field any) {
+		UnmarshalRowCells: func(n *ux.Node[Break], rows []ux.CellData) Break {
+			return ux.UnmarshalRow[Break](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

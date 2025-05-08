@@ -41,8 +41,8 @@ func NewMemory() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[Memory], rows []ux.CellData) {
-			n.Data = ux.UnmarshalRow[Memory](rows, func(key, value string) (field any) {
+		UnmarshalRowCells: func(n *ux.Node[Memory], rows []ux.CellData) Memory {
+			return ux.UnmarshalRow[Memory](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

@@ -31,7 +31,7 @@ func NewPeView() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[PeView], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[PeView], rows []ux.CellData) PeView {
 			if n.Container() {
 				n.Data.Name = n.SumChildren()
 			}
@@ -42,7 +42,7 @@ func NewPeView() ux.Widget {
 			//	{Text: fmt.Sprintf("%016X", n.Data.Address)},
 			//	{Text: fmt.Sprintf("%t", n.Data.Is64Bit)},
 			// }
-			n.Data = ux.UnmarshalRow[PeView](rows, func(key, value string) (field any) {
+			return ux.UnmarshalRow[PeView](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

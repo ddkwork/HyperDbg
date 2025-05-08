@@ -20,7 +20,7 @@ func NewThread() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[Thread], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[Thread], rows []ux.CellData) Thread {
 			if n.Container() {
 				n.SumChildren()
 			}
@@ -39,7 +39,7 @@ func NewThread() ux.Widget {
 			//	{Text: n.Data.CreatTime.Format("2006-01-02 15:04:05")},
 			//	{Text: fmt.Sprintf("%016X", n.Data.CPUCycles)},
 			// }
-			n.Data = ux.UnmarshalRow[Thread](rows, func(key, value string) (field any) {
+			return ux.UnmarshalRow[Thread](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},

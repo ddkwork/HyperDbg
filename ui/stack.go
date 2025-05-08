@@ -19,7 +19,7 @@ func NewStack() ux.Widget {
 				return ""
 			})
 		},
-		UnmarshalRowCells: func(n *ux.Node[CallStack], rows []ux.CellData) {
+		UnmarshalRowCells: func(n *ux.Node[CallStack], rows []ux.CellData) CallStack {
 			if n.Container() {
 				n.SumChildren()
 			}
@@ -33,7 +33,7 @@ func NewStack() ux.Widget {
 			//	{Text: n.Data.Notes},
 			// }
 
-			n.Data = ux.UnmarshalRow[CallStack](rows, func(key, value string) (field any) {
+			return ux.UnmarshalRow[CallStack](rows, func(key, value string) (field any) {
 				return nil
 			})
 		},
