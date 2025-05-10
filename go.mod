@@ -5,10 +5,10 @@ go 1.24.1
 require (
 	gioui.org v0.8.1-0.20250505174639-f73287be870d
 	github.com/ddkwork/bindgen v0.0.0-20250506101823-54c9c459ff83
-	github.com/ddkwork/ddk v0.0.0-20250506101835-7e5c7a057c89
-	github.com/ddkwork/golibrary v0.1.2-0.20250505042507-fb65953b7361
-	github.com/ddkwork/ux v0.0.0-20250506101838-502688e1a931
-	github.com/ebitengine/purego v0.9.0-alpha.3
+	github.com/ddkwork/ddk v0.0.0-20250510005510-977444309f2e
+	github.com/ddkwork/golibrary v0.1.2-0.20250507062101-31099ee7792e
+	github.com/ddkwork/ux v0.0.0-20250510172657-35b446f4eede
+	github.com/ebitengine/purego v0.9.0-alpha.4
 	github.com/saferwall/pe v1.5.6
 	github.com/winlabs/gowin32 v0.0.0-20240930213947-f504d7e14639
 	golang.org/x/sys v0.33.0
@@ -17,15 +17,17 @@ require (
 require (
 	gioui.org/shader v1.0.8 // indirect
 	gioui.org/x v0.8.2-0.20250115181849-c005f2ad1592 // indirect
+	git.wow.st/gmp/jni v0.0.0-20210610011705-34026c7e22d0 // indirect
 	github.com/alecthomas/chroma/v2 v2.17.2 // indirect
 	github.com/aquasecurity/table v1.10.0 // indirect
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/go-text/typesetting v0.3.0 // indirect
+	github.com/godbus/dbus/v5 v5.0.6 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
-	github.com/oligo/gvcode v0.2.1-0.20250424030509-8138ffc92f73 // indirect
+	github.com/oligo/gvcode v0.2.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/secDre4mer/pkcs7 v0.0.0-20240322103146-665324a4461d // indirect
 	github.com/spf13/afero v1.5.1 // indirect
