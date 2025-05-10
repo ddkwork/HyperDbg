@@ -24,10 +24,8 @@ var bar embed.FS
 var pageIco embed.FS
 
 func Run() {
-	w := ux.NewWindow("hyperdbg")
-	panel := ux.NewPanel(w)
-
-	hPanel := ux.NewHPanel(w)
+	panel := ux.NewPanel()
+	hPanel := ux.NewHPanel()
 	panel.AddChild(hPanel)
 
 	NewToolbar(hPanel)
@@ -84,7 +82,7 @@ func Run() {
 		vtab.AddTab(tab)
 	}
 	panel.AddChild(vtab)
-	ux.Run(panel)
+	ux.Run("hyperdbg", panel)
 
 	// callback := purego.NewCallback(func(text *byte) int {
 	//	fmt.Println("Received data:", sdk.BytePointerToString(text)) // todo check api name
