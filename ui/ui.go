@@ -38,7 +38,7 @@ func Run() {
 		case PeViewType:
 			m.Set(Type, NewPeView())
 		case LogType:
-			m.Set(Type, ux.LogView())
+			m.Set(Type, ux.NewLogView())
 		case NotesType:
 			m.Set(Type, new(zeroWidget))
 		case BreaksType:

@@ -4,10 +4,10 @@ go 1.24.1
 
 require (
 	gioui.org v0.8.1-0.20250505174639-f73287be870d
-	github.com/ddkwork/bindgen v0.0.0-20250506101823-54c9c459ff83
-	github.com/ddkwork/ddk v0.0.0-20250510005510-977444309f2e
+	github.com/ddkwork/bindgen v0.0.0-20250510175631-50b052892872
+	github.com/ddkwork/ddk v0.0.0-20250510175634-7409ec51a9e9
 	github.com/ddkwork/golibrary v0.1.2-0.20250507062101-31099ee7792e
-	github.com/ddkwork/ux v0.0.0-20250510172657-35b446f4eede
+	github.com/ddkwork/ux v0.0.0-20250510175635-543f5e815cf5
 	github.com/ebitengine/purego v0.9.0-alpha.4
 	github.com/saferwall/pe v1.5.6
 	github.com/winlabs/gowin32 v0.0.0-20240930213947-f504d7e14639
@@ -23,7 +23,7 @@ require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/go-text/typesetting v0.3.0 // indirect
-	github.com/godbus/dbus/v5 v5.0.6 // indirect
+	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
