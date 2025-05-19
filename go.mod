@@ -1,6 +1,6 @@
 module github.com/ddkwork/HyperDbg
 
-go 1.24.1
+go 1.24.3
 
 require (
 	gioui.org v0.8.1-0.20250505174639-f73287be870d
