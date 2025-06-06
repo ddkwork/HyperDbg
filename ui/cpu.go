@@ -16,7 +16,7 @@ import (
 	"github.com/ddkwork/ux/languages"
 	"github.com/ddkwork/ux/widget/material"
 
-	"github.com/ddkwork/golibrary/mylog"
+	"github.com/ddkwork/golibrary/std/mylog"
 	"github.com/saferwall/pe"
 )
 

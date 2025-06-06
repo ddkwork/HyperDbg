@@ -3,7 +3,7 @@ package ui
 import (
 	"io"
 
-	"github.com/ddkwork/golibrary/mylog"
+	"github.com/ddkwork/golibrary/std/mylog"
 )
 
 const pageSize = 1024 * 1024

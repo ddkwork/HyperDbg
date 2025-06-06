@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/ddkwork/ddk/xed"
-	"github.com/ddkwork/golibrary/stream"
+	"github.com/ddkwork/golibrary/std/stream"
 )
 
 func TestParserSys(t *testing.T) {

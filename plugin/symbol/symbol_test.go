@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ddkwork/golibrary/mylog"
-	"github.com/ddkwork/golibrary/stream"
+	"github.com/ddkwork/golibrary/std/mylog"
+	"github.com/ddkwork/golibrary/std/stream"
 )
 
 func TestName(t *testing.T) {

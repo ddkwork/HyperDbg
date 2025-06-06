@@ -8,8 +8,8 @@ import (
 	"github.com/ddkwork/ddk"
 	"github.com/ddkwork/ddk/winver"
 	"github.com/ddkwork/ddk/worker/environment"
-	"github.com/ddkwork/golibrary/safemap"
-	"github.com/ddkwork/golibrary/stream"
+	"github.com/ddkwork/golibrary/std/safemap"
+	"github.com/ddkwork/golibrary/std/stream"
 	"github.com/ddkwork/ux"
 )
 

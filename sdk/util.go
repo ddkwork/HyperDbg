@@ -8,8 +8,8 @@ import (
 	"unsafe"
 
 	"github.com/ddkwork/ddk/hardwareinfo"
-	"github.com/ddkwork/golibrary/mylog"
-	"github.com/ddkwork/golibrary/stream/bitfield"
+	"github.com/ddkwork/golibrary/std/mylog"
+	"github.com/ddkwork/golibrary/std/stream/bitfield"
 )
 
 func VmxSupportDetection() (ok bool) {

@@ -3,8 +3,8 @@ package ark
 import (
 	"testing"
 
-	"github.com/ddkwork/golibrary/safemap"
-	"github.com/ddkwork/golibrary/stream"
+	"github.com/ddkwork/golibrary/std/safemap"
+	"github.com/ddkwork/golibrary/std/stream"
 )
 
 func TestName(t *testing.T) {
