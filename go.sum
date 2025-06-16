@@ -23,7 +23,7 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8Yc
 github.com/daviddengcn/go-colortext v1.0.0/go.mod h1:zDqEI5NVUop5QPpVJUxE9UO10hRnmkD5G4Pmri9+m4c=
 github.com/ddkwork/ddk v0.0.0-20250519211246-9fe08265bdbe h1:RGSufnWRHzsMHPdCPeAa96dJz8ENvlVhN+s714fat7I=
 github.com/ddkwork/ddk v0.0.0-20250519211246-9fe08265bdbe/go.mod h1:JMx5xHy9tpA6qjBF3u4GyJENSNrIpAg7dqdhfYVTWv8=
-github.com/ddkwork/golibrary v0.1.4-0.20250605163732-5443832e2c55 h1:od1bvYN0uKB4Rqtq+K6hAWgnIyy673yg4bLzzu5nVOA=
+github.com/ddkwork/golibrary v0.1.4-0.20250616120223-0a6e456032ab h1:od1bvYN0uKB4Rqtq+K6hAWgnIyy673yg4bLzzu5nVOA=
 github.com/ddkwork/ux v0.0.0-20250604121246-9887c8211ffa h1:uf/v1hqki6HhJpyezzc4G/YKpg4kwZYHm8a6rx8HAcg=
 github.com/ddkwork/ux v0.0.0-20250604121246-9887c8211ffa/go.mod h1:56C9cLZVitQYP6PyTq3+WOBi2QfSubI6LM0DDwtP3jc=
 github.com/dlclark/regexp2 v1.11.5 h1:Q/sSnsKerHeCkc/jSTNq1oCm7KiVgUMZRDUoRu0JQZQ=
