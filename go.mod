@@ -1,11 +1,11 @@
 module github.com/ddkwork/HyperDbg
 
-go 1.24.3
+go 1.25rc1
 
 require (
 	gioui.org v0.8.1-0.20250531011347-8104d527c746
 	github.com/ddkwork/ddk v0.0.0-20250519211246-9fe08265bdbe
-	github.com/ddkwork/golibrary v0.1.4-0.20250605163732-5443832e2c55
+	github.com/ddkwork/golibrary v0.1.4-0.20250616120223-0a6e456032ab
 	github.com/ddkwork/ux v0.0.0-20250604121246-9887c8211ffa
 	github.com/ebitengine/purego v0.9.0-alpha.6
 	github.com/saferwall/pe v1.5.6
