@@ -258,7 +258,6 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
         std::string requestData = readHttpRequest(clientSocket);
 
         if (!requestData.empty()) {
-            // Parse the HTTP request
             std::string method, path, query, body;
             parseHttpRequest(requestData, method, path, query, body);
 
@@ -271,9 +270,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
 //            HyperDbgInterpreter("findasm \"mov dword ptr ds:[edi+0x5E8],eax\", 0x401000");
             //DbgGetBpList();
 
-            // Handle different endpoints
             try {
-                // Unified command execution endpoint
                 if (path == "/RunCommand") {
                     std::string cmd = queryParams["command"];
                     if (cmd.empty() && !body.empty()) {
@@ -284,9 +281,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                         sendHttpResponse(clientSocket, 400, "text/plain", "Missing command parameter");
                         continue;
                     }
-                    bool success = HyperDbgInterpreter(
-                            cmd.data());//response string in logCallback packet,所以执行返回0和1不重要，直接忽略，去收包的地方解析字符串
-//sendHttpResponse(clientSocket, success ? 200 : 500, "text/plain", response);
+                    HyperDbgInterpreter(cmd.data());
                 } else if (path == "/VmxSupportDetection") {
                     auto b = VmxSupportDetection();
                     std::string response = b ? "true" : "false";
@@ -295,6 +290,8 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     char vendorString[13];
                     CpuReadVendorString(vendorString);
                     sendHttpResponse(clientSocket, 200, "text/plain", vendorString);
+                } else if (path == "/ShowSignature") {
+                    HyperDbgShowSignature();
                 } else if (path == "/LoadVmmModule") {
                     bool success = HyperDbgLoadVmmModule();
                     std::string response = success ? "true" : "false";
@@ -339,17 +336,6 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
 
                     HyperDbgTestCommandParserShowTokens(command.data());
                     sendHttpResponse(clientSocket, 200, "text/plain", "OK");
-                } else if (path ==
-                           "/SetTextMessageCallbackUsingSharedBuffer") {//todo remove this use execute command instead stdout and stderr
-//                    std::string handler = queryParams["handler"];
-//                    if (handler.empty()) {
-//                        sendHttpResponse(clientSocket, 400, "text/plain", "Missing handler parameter");
-//                        continue;
-//                    }
-//
-//                    auto success = SetTextMessageCallbackUsingSharedBuffer(handler.c_str());
-//                    std::string response = success ? "true" : "false";
-//                    sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/ScriptReadFileAndExecuteCommandline") {
                     int argc = std::stoi(queryParams["argc"]);
                     std::string argv = queryParams["argv"];
@@ -450,9 +436,6 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
 
                 }
-
-
-
 //                else if (path == "/IsDebugActive") {
 //                    bool active = DbgIsRunning();
 //                    sendHttpResponse(clientSocket, 200, "text/plain", active ? "true" : "false");
