@@ -13,46 +13,16 @@ jobs:
   update-patch:
     runs-on: windows-latest
     steps:
-      # 1. 克隆上游仓库
-      #      - name: Clone upstream repository
-      #        shell: bash
-      #        run: |
-      #          git clone --recursive "https://github.com/HyperDbg/HyperDbg.git" -b dev
-      #          cd HyperDbg
-      #          git config --global user.email "action@github.com"
-      #          git config --global user.name "GitHub Action"
-      #          echo "克隆完成，当前目录: $(pwd)"
 
-      # 2. 检出当前仓库（包含补丁文件）
       - name: Checkout current repository
         uses: actions/checkout@v4
-#        with:
-#          path: current-repo
 
-      # 3. 应用补丁并推送
-      #      - name: Apply patch and push changes
-      #        shell: bash
-      #        run: |
-      #          cd HyperDbg
-      #          cp "../current-repo/mcp.patch" "temp.patch"
-      #          git apply "temp.patch"
-      #          rm "temp.patch"
-      #
-      #          git add .
-      #          if ! git diff --cached --quiet; then
-      #            git commit -m "自动补丁更新 $(date +'%Y-%m-%d %H:%M')"
-      #            git remote set-url origin "https://github.com/ddkwork/HyperDbg.git"
-      #            git push --force "https://ddkwork:$GH_TOKEN@github.com/ddkwork/HyperDbg.git" dev
-      #          fi
-      #        env:
-      #          GH_TOKEN: ${{ secrets.tk }}
 
-      # 4. 设置Go环境
-      #      - name: Setup Go environment
-      #        uses: actions/setup-go@v5
-      #        with:
-      #          go-version: '1.25.0-rc.1'
-      #          check-latest: true
+      - name: Setup Go environment
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.0-rc.1'
+          check-latest: true
 
       # 5. 运行bindgen测试（禁用CGO） - 保留注释用于后续启用
       #      - name: Run bindgen tests
@@ -61,38 +31,26 @@ jobs:
       #          cd HyperDbg/hyperdbg/libhyperdbg/code/export
       #          CGO_ENABLED=0 go test . -v
 
-      # 6. 安装WDK（Windows Driver Kit）
-      #      - name: Install Windows Driver Kit (WDK)
-      #        run: |
-      #          $wdkSetupPath = "$Env:TEMP\wdksetup.exe"
-      #          (New-Object Net.WebClient).DownloadFile('https://go.microsoft.com/fwlink/?linkid=2196230', $wdkSetupPath)
-      #          Start-Process -FilePath $wdkSetupPath -ArgumentList "/quiet" -NoNewWindow -Wait
-      #        shell: powershell
+      - name: Install Windows Driver Kit (WDK)
+        run: |
+          $wdkSetupPath = "$Env:TEMP\wdksetup.exe"
+          (New-Object Net.WebClient).DownloadFile('https://go.microsoft.com/fwlink/?linkid=2196230', $wdkSetupPath)
+          Start-Process -FilePath $wdkSetupPath -ArgumentList "/quiet" -NoNewWindow -Wait
+        shell: powershell
 
-      # 7. 设置MSBuild环境
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
 
-      # 8. 构建解决方案 - 添加详细调试日志
       - name: Build HyperDbg with cmake
         shell: cmd
         run: |
-          :: 切换到包含CMakeLists.txt的目录
-          cd hyperdbg
-
-          :: 诊断日志：确认是否在正确位置
-          echo [DEBUG] 当前构建目录：%CD%
-          echo [DEBUG] 目录内容：
-          dir /b
-          echo [DEBUG] CMakeLists.txt存在：%cd%\CMakeLists.txt
-
-          :: 核心构建命令
+          ::git clone --progress https://github.com/ddkwork/keystone.git
+          ::rmdir /s /q cmake-build-release
           set "DIA_PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\DIA SDK"
           cmake -G "Visual Studio 17 2022" -A x64 -S . -B cmake-build-release -DDIA_SDK_INCLUDE_DIR="%DIA_PATH%\include"
           cmake --build cmake-build-release --config Release --parallel 6
-      #              working-directory: HyperDbg/hyperdbg
+        working-directory: hyperdbg
 
-      # 9. 上传构建产物
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
