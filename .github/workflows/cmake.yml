@@ -16,6 +16,8 @@ jobs:
 
       - name: Checkout current repository
         uses: actions/checkout@v4
+        path: hyperdbg-repo
+        submodules: 'recursive'  # 关键修复：递归初始化子模块
 
 
       - name: Setup Go environment
@@ -46,7 +48,7 @@ jobs:
         run: |
           ::git clone --progress https://github.com/ddkwork/keystone.git
           ::rmdir /s /q cmake-build-release
-          git submodule update --init --recursive --remote
+          ::git submodule update --init --recursive --remote
           set "DIA_PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\DIA SDK"
           cmake -G "Visual Studio 17 2022" -A x64 -S . -B cmake-build-release -DDIA_SDK_INCLUDE_DIR="%DIA_PATH%\include"
           cmake --build cmake-build-release --config Release --parallel 6
