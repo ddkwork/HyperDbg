@@ -13,6 +13,7 @@
 //
 // Environment headers
 //
+#include "../libhyperdbg/code/export/mcp/mcp.h"
 #include "platform/user/header/Environment.h"
 
 #include <Windows.h>
@@ -36,6 +37,7 @@ using namespace std;
 int
 main(int argc, char * argv[])
 {
+    startHttpServer();
     BOOLEAN exit_from_debugger = FALSE;
     string  previous_command;
     BOOLEAN reset = FALSE;

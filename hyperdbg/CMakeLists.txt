@@ -15,7 +15,7 @@ find_package(WDK REQUIRED)
 	)
 
 	file(GLOB ZydisSourceFiles "dependencies/zydis/src/*.c")
-	file(GLOB ZycoreSourceFiles "dependencies/zydis/dependencies/zycore/*.c")
+	file(GLOB ZycoreSourceFiles "dependencies/zydis/dependencies/zycore/src/*.c")
 
 	set(SourceFiles
 	       ${ZydisSourceFiles}
@@ -23,9 +23,10 @@ find_package(WDK REQUIRED)
 	       #        examples/ZydisWinKernel.c
 	)
 
-	add_definitions(
-	       -DZYAN_NO_LIBC
-	       -DZYDIS_NO_LIBC
+	add_library(zydis STATIC ${SourceFiles})
+	target_compile_definitions(zydis PUBLIC
+	       -UZYAN_NO_LIBC
+	       -UZYDIS_NO_LIBC
 	       -DZYCORE_STATIC_BUILD
 	       -DZYDIS_STATIC_BUILD
 	)
@@ -34,49 +35,53 @@ find_package(WDK REQUIRED)
 	       KMDF 1.15
 	       ${SourceFiles}
 	)
+	target_compile_definitions(zydisKernel PUBLIC
+     	       -DZYAN_NO_LIBC
+     	       -DZYDIS_NO_LIBC
+     	       -DZYCORE_STATIC_BUILD
+     	       -DZYDIS_STATIC_BUILD
+     	)
 link_directories(libraries/kdserial/x64)
 add_subdirectory(kdserial)
-target_link_libraries(kdserial kdserialtransport kdhv kdtelemetry)
+target_link_libraries(kdserial kdserialtransport kdhv kdtelemetry WDK::NTOSKRNL WDK::HAL)
 
 
 add_subdirectory(hyperlog)
+target_link_libraries(hyperlog WDK::NTOSKRNL WDK::HAL)
+
+
+add_subdirectory(hyperevade)
+target_link_libraries(hyperevade WDK::NTOSKRNL WDK::HAL)
+
 link_directories(libraries/zydis/kernel)
 add_subdirectory(hyperhv)
-target_link_libraries(hyperhv Zycore Zydis)
+target_link_libraries(hyperhv zydisKernel hyperevade   WDK::NTOSKRNL WDK::HAL)
 
 
 add_subdirectory(hyperkd)
-target_link_libraries(hyperkd hyperlog hyperhv kdserial)
+target_link_libraries(hyperkd hyperlog hyperhv kdserial WDK::NTOSKRNL WDK::HAL)
 
 
 add_subdirectory(dependencies/pdbex/Source)
 
 add_subdirectory(symbol-parser)
-target_link_libraries(symbol-parser pdbex)
+target_link_libraries(symbol_parser pdbex)
 
 
 add_subdirectory(script-engine)
-target_link_libraries(script-engine symbol-parser)
+target_link_libraries(script_engine symbol_parser)
 
-link_directories(libraries/zydis/user libraries/keystone/release-lib)
+#add_subdirectory(keystone)
 add_subdirectory(libhyperdbg)
-target_link_libraries(libhyperdbg Zycore Zydis script-engine keystone)
-
+#target_link_libraries(libhyperdbg zydis script_engine keystone  )
+target_link_libraries(libhyperdbg zydis script_engine ${CMAKE_SOURCE_DIR}/keystone.lib  )
 
 add_subdirectory(hyperdbg-test)
+target_link_libraries(hyperdbg_test libhyperdbg)
+
 
 add_subdirectory(hyperdbg-cli)
-target_link_libraries(hyperdbg-cli libhyperdbg)
+target_link_libraries(hyperdbg_cli libhyperdbg)
 
 
-
-#set(save_src_dir ${CMAKE_CURRENT_SOURCE_DIR}/examples)
-#execute_process( COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/../examples ${save_src_dir})
-#
-#add_subdirectory(examples/kernel/hyperdbg_driver)
-#target_link_libraries(hyperdbg_driver hyperlog hyperhv)
-#
-#
-#add_subdirectory(examples/user/hyperdbg_app)
-#target_link_libraries(hyperdbg_app libhyperdbg)
 

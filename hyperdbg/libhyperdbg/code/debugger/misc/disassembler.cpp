@@ -33,8 +33,8 @@ all
 #include "Zycore/LibC.h"
 #include "Zydis/Zydis.h"
 
-#pragma comment(lib, "Zydis.lib")
-#pragma comment(lib, "Zycore.lib")
+//#pragma comment(lib, "Zydis.lib")
+//#pragma comment(lib, "Zycore.lib")
 
 //
 // Global Variables
