@@ -78,12 +78,11 @@ jobs:
         shell: cmd
         run: |
           ::git clone --progress https://github.com/ddkwork/keystone.git
-          cd hyperdbg
           ::rmdir /s /q cmake-build-release
           set "DIA_PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\DIA SDK"
           cmake -G "Visual Studio 17 2022" -A x64 -S . -B cmake-build-release -DDIA_SDK_INCLUDE_DIR="%DIA_PATH%\include"
           cmake --build cmake-build-release --config Release --parallel 6
-      #        working-directory: hyperdbg
+              working-directory: HyperDbg/hyperdbg
 
       # 9. 上传构建产物
       - name: Upload build artifacts
