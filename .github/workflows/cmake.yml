@@ -26,8 +26,8 @@ jobs:
       # 2. 检出当前仓库（包含补丁文件）
       - name: Checkout current repository
         uses: actions/checkout@v4
-        with:
-          path: current-repo
+#        with:
+#          path: current-repo
 
       # 3. 应用补丁并推送
       #      - name: Apply patch and push changes
