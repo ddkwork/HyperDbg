@@ -6,13 +6,8 @@
  },
  {
   "Name": "CpuReadVendorString",
-  "Params": [
-   {
-    "Name": "vendor_string",
-    "Type": "CHAR *"
-   }
-  ],
-  "ReturnType": "VOID"
+  "Params": null,
+  "ReturnType": "CHAR *"
  },
  {
   "Name": "HyperDbgLoadVmmModule",

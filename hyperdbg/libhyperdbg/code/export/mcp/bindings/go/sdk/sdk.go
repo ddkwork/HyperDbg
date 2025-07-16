@@ -12,8 +12,8 @@ type Debugger struct{}
 func (Debugger) VmxSupportDetection() bool {
 	return request[bool]("VmxSupportDetection", nil)
 }
-func (Debugger) CpuReadVendorString(vendor_string string) {
-	request[void]("CpuReadVendorString", map[string]string{"vendor_string": vendor_string})
+func (Debugger) CpuReadVendorString() string {
+	return request[string]("CpuReadVendorString", nil)
 }
 func (Debugger) LoadVmmModule() int {
 	return request[int]("LoadVmmModule", nil)

@@ -1,6 +1,7 @@
 package mcp
 
 import (
+	"github.com/ddkwork/golibrary/std/assert"
 	"github.com/ddkwork/mcp/bindings/go/sdk"
 	"os"
 	"path/filepath"
@@ -13,10 +14,8 @@ import (
 
 func TestDebug(t *testing.T) {
 	d := sdk.Debugger{}
-	if !d.VmxSupportDetection() {
-		panic("VMX not supported")
-	}
-
+	assert.True(t, d.VmxSupportDetection())
+	assert.Equal(t, "GenuineIntel", d.CpuReadVendorString())
 }
 
 /* todo
@@ -292,14 +291,9 @@ var apis = []ApiMeta{
 		ReturnType: "BOOLEAN",
 	},
 	{
-		Name: "CpuReadVendorString",
-		Params: []NameType{
-			{
-				Name: "vendor_string",
-				Type: "CHAR *",
-			},
-		},
-		ReturnType: "VOID",
+		Name:       "CpuReadVendorString",
+		Params:     nil,
+		ReturnType: "CHAR *",
 	},
 	{
 		Name:       "HyperDbgLoadVmmModule",

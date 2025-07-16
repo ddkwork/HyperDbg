@@ -258,7 +258,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
             // Handle different endpoints
             try {
                 // Unified command execution endpoint
-                if (path == "/ExecCommand") {
+                if (path == "/RunCommand") {
                     std::string cmd = queryParams["command"];
                     if (cmd.empty() && !body.empty()) {
                         cmd = body;
@@ -401,10 +401,9 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     std::string response = b ? "true" : "false";
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/CpuReadVendorString") {
-//#include "commands.h"
-//                    std::string VendorString = InstructionSet::Vendor();//todo
-//                    std::string vendorString = CpuReadVendorString();
-//                    sendHttpResponse(clientSocket, 200, "text/plain", vendorString);
+                    char vendorString[13];
+                    CpuReadVendorString(vendorString);
+                    sendHttpResponse(clientSocket, 200, "text/plain", vendorString);
                 } else if (path == "/LoadVmmModule") {
                     bool success = HyperDbgLoadVmmModule();
                     std::string response = success ? "true" : "false";
