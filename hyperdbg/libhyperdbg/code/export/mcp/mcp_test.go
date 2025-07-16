@@ -1,6 +1,7 @@
 package mcp
 
 import (
+	"mcp/bindings/go/sdk"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -9,6 +10,11 @@ import (
 
 	"github.com/ddkwork/golibrary/std/stream"
 )
+
+func TestDebug(t *testing.T) {
+	d := sdk.Debugger{}
+	d.VmxSupportDetection()
+}
 
 /* todo
  *  make all commands json file
@@ -50,7 +56,7 @@ func Test_Bind_Go(t *testing.T) {
 		//    mcp_test.go:87: unknown param type: register_id
 	}
 	g := stream.NewGeneratedFile()
-	g.P("type debugger struct {}")
+	g.P("type Debugger struct {}")
 	for _, api := range apis {
 		api.Name = strings.TrimPrefix(api.Name, "HyperDbg")
 		params := ""
@@ -66,7 +72,7 @@ func Test_Bind_Go(t *testing.T) {
 			returnType = ""
 			returnSyntax = ""
 		}
-		g.P("func (debugger) ", api.Name, "("+params, ") ", returnType, " {")
+		g.P("func (Debugger) ", api.Name, "("+params, ") ", returnType, " {")
 
 		var callParams string
 		for i, param := range api.Params {
