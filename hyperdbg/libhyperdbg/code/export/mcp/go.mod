@@ -1,4 +1,4 @@
-module github.com/ddkwork/HyperDbg/hyperdbg/libhyperdbg/code/export/mcp
+module github.com/ddkwork/mcp
 
 go 1.25rc1
 
