@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 23)
 enable_language(ASM_MASM)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+#set(CMAKE_BUILD_TYPE Debug)#todo do not commit this line,debug only
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 find_package(WDK REQUIRED)
 
@@ -74,7 +76,11 @@ target_link_libraries(script_engine symbol_parser)
 #add_subdirectory(keystone)
 add_subdirectory(libhyperdbg)
 #target_link_libraries(libhyperdbg zydis script_engine keystone  )
-target_link_libraries(libhyperdbg zydis script_engine ${CMAKE_SOURCE_DIR}/keystone.lib)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_link_libraries(libhyperdbg zydis script_engine ${CMAKE_SOURCE_DIR}/keystone_debug.lib)
+else ()
+    target_link_libraries(libhyperdbg zydis script_engine ${CMAKE_SOURCE_DIR}/keystone.lib)
+endif ()
 
 add_subdirectory(hyperdbg-test)
 target_link_libraries(hyperdbg_test libhyperdbg)
