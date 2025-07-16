@@ -108,14 +108,14 @@ void plugsetup() { pluginSetup(); }
 // Start the HTTP server
 bool startHttpServer() {
     printf("starting http server...");
-    std::lock_guard<std::mutex> lock(g_httpMutex);
+//    std::lock_guard<std::mutex> lock(g_httpMutex);
 
-    // Stop existing server if running
+//     Stop existing server if running
     if (g_httpServerRunning) {
         stopHttpServer();
     }
 
-    // Create and start the server thread
+//     Create and start the server thread
     g_httpServerThread = CreateThread(NULL, 0, HttpServerThread, NULL, 0, NULL);
     if (g_httpServerThread == NULL) {
         printf("Failed to create HTTP server thread");
@@ -173,6 +173,8 @@ std::string urlDecode(const std::string &str) {
 
 // HTTP server thread function using standard Winsock
 DWORD WINAPI HttpServerThread(LPVOID lpParam) {
+//    printf("stop HttpServer called");
+//    return 0;
     WSADATA wsaData;
     int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (result != 0) {
