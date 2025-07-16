@@ -91,15 +91,6 @@ def HyperDbgTestCommandParserShowTokens()
 def HyperDbgShowSignature()
 
 @mcp.tool()
-def SetTextMessageCallback()
-
-@mcp.tool()
-def SetTextMessageCallbackUsingSharedBuffer()
-
-@mcp.tool()
-def UnsetTextMessageCallback()
-
-@mcp.tool()
 def ScriptReadFileAndExecuteCommandline()
 
 @mcp.tool()

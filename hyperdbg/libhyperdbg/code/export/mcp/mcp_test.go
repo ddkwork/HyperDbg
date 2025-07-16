@@ -16,10 +16,8 @@ func TestDebug(t *testing.T) {
 	d := sdk.Debugger{}
 	assert.True(t, d.VmxSupportDetection())
 	assert.Equal(t, "GenuineIntel", d.CpuReadVendorString())
-	println(d.RunCommand("xxoo"))
-	if strings.HasPrefix(d.RunCommand("xxoo"), "err") {
-
-	}
+	d.ShowSignature()
+	d.RunCommand("xxoo")
 }
 
 /* todo
@@ -371,21 +369,6 @@ var apis = []ApiMeta{
 
 	{
 		Name:       "HyperDbgShowSignature",
-		Params:     nil,
-		ReturnType: "VOID",
-	},
-	{
-		Name:       "SetTextMessageCallback", //todo remove
-		Params:     nil,
-		ReturnType: "VOID",
-	},
-	{
-		Name:       "SetTextMessageCallbackUsingSharedBuffer", //todo remove
-		Params:     nil,
-		ReturnType: "VOID",
-	},
-	{
-		Name:       "UnsetTextMessageCallback", //todo remove
 		Params:     nil,
 		ReturnType: "VOID",
 	},

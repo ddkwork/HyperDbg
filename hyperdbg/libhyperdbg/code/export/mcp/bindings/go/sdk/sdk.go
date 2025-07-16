@@ -48,15 +48,6 @@ func (Debugger) TestCommandParserShowTokens(command string) {
 func (Debugger) ShowSignature() {
 	request[void]("ShowSignature", nil)
 }
-func (Debugger) SetTextMessageCallback() {
-	request[void]("SetTextMessageCallback", nil)
-}
-func (Debugger) SetTextMessageCallbackUsingSharedBuffer() {
-	request[void]("SetTextMessageCallbackUsingSharedBuffer", nil)
-}
-func (Debugger) UnsetTextMessageCallback() {
-	request[void]("UnsetTextMessageCallback", nil)
-}
 func (Debugger) ScriptReadFileAndExecuteCommandline(argc int, argv string) int {
 	return request[int]("ScriptReadFileAndExecuteCommandline", map[string]string{
 		"argc": strconv.Itoa(argc),

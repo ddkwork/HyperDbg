@@ -86,21 +86,6 @@
   "ReturnType": "VOID"
  },
  {
-  "Name": "SetTextMessageCallback",
-  "Params": null,
-  "ReturnType": "VOID"
- },
- {
-  "Name": "SetTextMessageCallbackUsingSharedBuffer",
-  "Params": null,
-  "ReturnType": "VOID"
- },
- {
-  "Name": "UnsetTextMessageCallback",
-  "Params": null,
-  "ReturnType": "VOID"
- },
- {
   "Name": "ScriptReadFileAndExecuteCommandline",
   "Params": [
    {
