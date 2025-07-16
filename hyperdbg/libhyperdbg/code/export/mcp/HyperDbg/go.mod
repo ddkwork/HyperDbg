@@ -16,7 +16,6 @@ require (
 	golang.org/x/sync v0.16.0
 	golang.org/x/sys v0.34.0
 	modernc.org/cc/v4 v4.26.2
-	github.com/ddkwork/HyperDbg/hyperdbg/libhyperdbg/code/export/mcp@letest
 )
 
 replace gioui.org => github.com/ddkwork/gio v0.0.0-20250716015338-34bc59a9e244

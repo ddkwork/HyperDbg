@@ -4,7 +4,6 @@ import (
 	"iter"
 
 	"gioui.org/layout"
-	"github.com/ddkwork/HyperDbg/sdk"
 	"github.com/ddkwork/ddk"
 	"github.com/ddkwork/ddk/winver"
 	"github.com/ddkwork/ddk/worker/environment"
@@ -129,7 +128,8 @@ func New() ux.Widget {
 			RowDoubleClickCallback: func() {
 			},
 			SetRootRowsCallBack: func() {
-				sysCall := ddk.NewSysCall(int64(sdk.GetKernelBase()))
+				//sysCall := ddk.NewSysCall(int64(sdk.GetKernelBase()))
+				sysCall := ddk.NewSysCall(int64(0)) //todo
 				sysCall.KeServiceDescriptorTable = ddk.DecodeNtApi("C:\\Windows\\System32\\ntdll.dll")
 				sysCall.KeServiceDescriptorTableShadow = ddk.DecodeNtApi("C:\\Windows\\System32\\win32u.dll")
 				NtTableContainer := ux.NewContainerNode("NtTable", ddk.NtApi{})

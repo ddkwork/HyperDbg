@@ -3,6 +3,7 @@ package ui
 import (
 	"encoding/hex"
 	"fmt"
+	"github.com/ddkwork/mcp/bindings/go/sdk"
 	"iter"
 	"os"
 	"path/filepath"
@@ -11,7 +12,6 @@ import (
 
 	"gioui.org/app"
 	"gioui.org/layout"
-	"github.com/ddkwork/HyperDbg/hyperdbg/libhyperdbg/code/export/mcp/bindings/go/sdk"
 	"github.com/ddkwork/ddk/xed"
 
 	"github.com/ddkwork/ux"
@@ -1156,11 +1156,15 @@ func LayoutDisassemblyTable() ux.Widget {
 			case ".exe", ".dll", ".sys":
 				mylog.Info("dropped file: ", file)
 				TargetExePath = file
+				if !d.VmxSupportDetection() {
+					panic("vmx not support")
+				}
 				t.SetRootRowsCallBack()
 
-				sdk.ConnectLocalDebugger()
-				sdk.LoadVmm()
-				sdk.RunCommandEx("start") //todo bug and make mcp protocol
+				d.ConnectLocalDebugger()
+				d.LoadVmmModule()
+				//d.RunCommandEx("start")
+				d.Interpreter("run") //todo rename
 			default:
 				mylog.Check(file + " is not a valid file type")
 			}
@@ -1168,6 +1172,8 @@ func LayoutDisassemblyTable() ux.Widget {
 	})
 	return t
 }
+
+var d = sdk.Debugger{}
 
 type Stack struct {
 	Address    int
