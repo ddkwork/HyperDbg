@@ -1,7 +1,7 @@
 package mcp
 
 import (
-	"mcp/bindings/go/sdk"
+	"github.com/ddkwork/HyperDbg/hyperdbg/libhyperdbg/code/export/mcp/bindings/go/sdk"
 	"os"
 	"path/filepath"
 	"strconv"
