@@ -1,4 +1,4 @@
-name: patch HyperDbg mcp
+name: cmake build and mcp patch
 
 on:
   push:
