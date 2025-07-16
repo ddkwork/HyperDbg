@@ -18,11 +18,11 @@ jobs:
         uses: actions/checkout@v4
 
 
-      - name: Setup Go environment
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.25.0-rc.1'
-          check-latest: true
+#      - name: Setup Go environment
+#        uses: actions/setup-go@v5
+#        with:
+#          go-version: '1.25.0-rc.1'
+#          check-latest: true
 
       # 5. 运行bindgen测试（禁用CGO） - 保留注释用于后续启用
       #      - name: Run bindgen tests
@@ -31,12 +31,12 @@ jobs:
       #          cd HyperDbg/hyperdbg/libhyperdbg/code/export
       #          CGO_ENABLED=0 go test . -v
 
-      - name: Install Windows Driver Kit (WDK)
-        run: |
-          $wdkSetupPath = "$Env:TEMP\wdksetup.exe"
-          (New-Object Net.WebClient).DownloadFile('https://go.microsoft.com/fwlink/?linkid=2196230', $wdkSetupPath)
-          Start-Process -FilePath $wdkSetupPath -ArgumentList "/quiet" -NoNewWindow -Wait
-        shell: powershell
+#      - name: Install Windows Driver Kit (WDK)
+#        run: |
+#          $wdkSetupPath = "$Env:TEMP\wdksetup.exe"
+#          (New-Object Net.WebClient).DownloadFile('https://go.microsoft.com/fwlink/?linkid=2196230', $wdkSetupPath)
+#          Start-Process -FilePath $wdkSetupPath -ArgumentList "/quiet" -NoNewWindow -Wait
+#        shell: powershell
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
