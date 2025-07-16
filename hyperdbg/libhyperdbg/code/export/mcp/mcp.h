@@ -16,7 +16,7 @@ IMPORT_EXPORT_LIBHYPERDBG void stopHttpServer();
 #include <algorithm>
 
 // 模拟 Go 的 strings 包
-struct strings {
+package strings {
     // 检查前缀 - 完全匹配 Go 的签名
     static bool HasPrefix(const std::string& s, const std::string& prefix) {
         return s.size() >= prefix.size() &&

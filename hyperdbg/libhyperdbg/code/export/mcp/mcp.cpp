@@ -173,7 +173,7 @@ std::string urlDecode(const std::string &str) {
 
 SOCKET clientSocket;
 
-int logCallback(const char *message) {//todo need websocket?
+int messageCallback(const char *message) {//todo need websocket?
     printf("%s", message);
     auto statusCode = 200;
     if (strings::HasPrefix(message, "err"))
@@ -230,7 +230,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
     u_long mode = 1;
     ioctlsocket(g_serverSocket, FIONBIO, &mode);
 
-    SetTextMessageCallback(logCallback);
+    SetTextMessageCallback(messageCallback);
 
     // Main server loop
     while (g_httpServerRunning) {
@@ -280,7 +280,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                         cmd = body;
                     }
                     if (cmd.empty()) {
-                        logCallback("Missing command parameter");
+                        messageCallback("Missing command parameter");
                         sendHttpResponse(clientSocket, 400, "text/plain", "Missing command parameter");
                         continue;
                     }
