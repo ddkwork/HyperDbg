@@ -79,7 +79,7 @@ def HyperDbgUninstallVmmDriver()
 def HyperDbgStopVmmDriver()
 
 @mcp.tool()
-def HyperDbgInterpreter()
+def RunCommand()
 
 @mcp.tool()
 def HyperDbgTestCommandParser()

@@ -138,6 +138,7 @@ func Test_Bind_Go(t *testing.T) {
 			}
 			if api.Name == "Interpreter" { //for debug
 				//println()
+				//api.Name = "RunCommand"
 			}
 			if i < len(api.Params) {
 				callParams += ","
@@ -327,7 +328,7 @@ var apis = []ApiMeta{
 		ReturnType: "INT",
 	},
 	{
-		Name: "HyperDbgInterpreter", // RunCommand
+		Name: "RunCommand", // RunCommand  HyperDbgInterpreter
 		Params: []NameType{
 			{
 				Name: "command",

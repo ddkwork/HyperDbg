@@ -40,7 +40,7 @@
   "ReturnType": "INT"
  },
  {
-  "Name": "HyperDbgInterpreter",
+  "Name": "RunCommand",
   "Params": [
    {
     "Name": "command",
