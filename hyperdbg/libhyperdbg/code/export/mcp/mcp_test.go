@@ -13,7 +13,10 @@ import (
 
 func TestDebug(t *testing.T) {
 	d := sdk.Debugger{}
-	d.VmxSupportDetection()
+	if !d.VmxSupportDetection() {
+		panic("VMX not supported")
+	}
+
 }
 
 /* todo
