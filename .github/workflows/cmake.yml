@@ -77,21 +77,16 @@ jobs:
       - name: Build HyperDbg with cmake
         shell: cmd
         run: |
-          :: 打印当前路径
-          echo 当前根目录: %CD%
-          echo 根目录内容: 
-          dir /b
-          
-          :: 打印hyperdbg目录
-          echo 检查hyperdbg目录:
+          :: 切换到包含CMakeLists.txt的目录
           cd hyperdbg
-          echo 当前hyperdbg目录: %CD%
-          echo hyperdbg目录内容:
+
+          :: 诊断日志：确认是否在正确位置
+          echo [DEBUG] 当前构建目录：%CD%
+          echo [DEBUG] 目录内容：
           dir /b
+          echo [DEBUG] CMakeLists.txt存在：%cd%\CMakeLists.txt
 
           :: 核心构建命令
-          ::git clone --progress https://github.com/ddkwork/keystone.git
-          ::rmdir /s /q cmake-build-release
           set "DIA_PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\DIA SDK"
           cmake -G "Visual Studio 17 2022" -A x64 -S . -B cmake-build-release -DDIA_SDK_INCLUDE_DIR="%DIA_PATH%\include"
           cmake --build cmake-build-release --config Release --parallel 6
