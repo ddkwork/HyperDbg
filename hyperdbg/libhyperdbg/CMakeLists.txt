@@ -195,3 +195,9 @@ target_compile_definitions(libhyperdbg PRIVATE
         -DNTDDI_VERSION=0x05020000
 )
 
+add_custom_command(TARGET libhyperdbg POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_SOURCE_DIR}/copybin" go run .
+        COMMENT "执行 Go 程序复制文件到 hyperdbg-cli"
+        VERBATIM
+)
+

@@ -171,6 +171,15 @@ std::string urlDecode(const std::string &str) {
     return decoded;
 }
 
+SOCKET clientSocket;
+
+int logCallback(const char *Text) {//todo need websocket?
+    printf("%s", Text);
+    sendHttpResponse(clientSocket, 200, "text/plain", Text);
+    return 0;
+}
+
+
 // HTTP server thread function using standard Winsock
 DWORD WINAPI HttpServerThread(LPVOID lpParam) {
     WSADATA wsaData;
@@ -216,12 +225,14 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
     u_long mode = 1;
     ioctlsocket(g_serverSocket, FIONBIO, &mode);
 
+    SetTextMessageCallback(logCallback);
+
     // Main server loop
     while (g_httpServerRunning) {
         // Accept a client connection
         sockaddr_in clientAddr;
         int clientAddrSize = sizeof(clientAddr);
-        SOCKET clientSocket = accept(g_serverSocket, (sockaddr *) &clientAddr, &clientAddrSize);
+        clientSocket = accept(g_serverSocket, (sockaddr *) &clientAddr, &clientAddrSize);
 
         if (clientSocket == INVALID_SOCKET) {
             // Check if we need to exit
@@ -263,139 +274,14 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     if (cmd.empty() && !body.empty()) {
                         cmd = body;
                     }
-
                     if (cmd.empty()) {
+                        logCallback("Missing command parameter");
                         sendHttpResponse(clientSocket, 400, "text/plain", "Missing command parameter");
                         continue;
                     }
-
-                    // Generate unique temporary log file
-                    char tempPath[MAX_PATH];
-                    GetTempPathA(MAX_PATH, tempPath);
-                    std::string logFile =
-                            std::string(tempPath) + "hyperdbg_cmd_" + std::to_string(GetTickCount()) + ".log";
-
-                    // Start log redirection
-                    std::string redirectCmd = "LogRedirect \"" + logFile + "\"";
-                    HyperDbgInterpreter(redirectCmd.data());
-
-                    // Small delay to ensure redirection is active
-                    Sleep(50);
-
-                    // Clear any existing content in the log
-                    HyperDbgInterpreter((CHAR *) "LogClear");
-
-                    // Small delay after clearing
-                    Sleep(50);
-
-                    // Execute the actual command
-                    bool success = HyperDbgInterpreter(cmd.data());
-
-                    // Wait for command to complete and output to be written
-                    Sleep(200);
-
-                    // Stop log redirection
-                    HyperDbgInterpreter((CHAR *) "LogRedirectStop");
-
-                    // Wait a bit more for file operations to complete
-                    Sleep(100);
-
-                    // Read the captured output with retry mechanism
-                    std::string output;
-                    int retryCount = 0;
-                    const int maxRetries = 5;
-
-                    while (retryCount < maxRetries) {
-                        std::ifstream file(logFile, std::ios::binary);
-                        if (file.is_open()) {
-                            // Get file size
-                            file.seekg(0, std::ios::end);
-                            std::streamsize fileSize = file.tellg();
-                            file.seekg(0, std::ios::beg);
-
-                            if (fileSize > 0) {
-                                // Read the entire file
-                                std::stringstream buffer;
-                                buffer << file.rdbuf();
-                                output = buffer.str();
-                                file.close();
-                                break;
-                            } else {
-                                file.close();
-                                // File exists but is empty, wait and retry
-                                Sleep(100);
-                                retryCount++;
-                            }
-                        } else {
-                            // File doesn't exist yet, wait and retry
-                            Sleep(100);
-                            retryCount++;
-                        }
-                    }
-
-                    // Clean up temporary file
-                    DeleteFileA(logFile.c_str());
-
-                    // Process the captured output
-                    if (!output.empty()) {
-                        // Filter out log redirection messages
-                        size_t pos = 0;
-                        while ((pos = output.find("Log will be redirected to", pos)) != std::string::npos) {
-                            size_t endPos = output.find('\n', pos);
-                            if (endPos != std::string::npos) {
-                                output.erase(pos, endPos - pos + 1);
-                            } else {
-                                output.erase(pos);
-                                break;
-                            }
-                        }
-
-                        // Remove "Log redirection stopped" messages
-                        pos = 0;
-                        while ((pos = output.find("Log redirection stopped", pos)) != std::string::npos) {
-                            size_t endPos = output.find('\n', pos);
-                            if (endPos != std::string::npos) {
-                                output.erase(pos, endPos - pos + 1);
-                            } else {
-                                output.erase(pos);
-                                break;
-                            }
-                        }
-
-                        // Remove "Log cleared" messages
-                        pos = 0;
-                        while ((pos = output.find("Log cleared", pos)) != std::string::npos) {
-                            size_t endPos = output.find('\n', pos);
-                            if (endPos != std::string::npos) {
-                                output.erase(pos, endPos - pos + 1);
-                            } else {
-                                output.erase(pos);
-                                break;
-                            }
-                        }
-
-                        // Trim whitespace and empty lines
-                        output.erase(0, output.find_first_not_of(" \t\n\r"));
-                        output.erase(output.find_last_not_of(" \t\n\r") + 1);
-                    }
-
-                    // Prepare response
-                    std::string response;
-                    if (success) {
-                        if (!output.empty()) {
-                            response = output;
-                        } else {
-                            response = "Command executed successfully (no output captured)";
-                        }
-                    } else {
-                        if (!output.empty()) {
-                            response = "Command failed:\n" + output;
-                        } else {
-                            response = "Command execution failed";
-                        }
-                    }
-
-                    sendHttpResponse(clientSocket, success ? 200 : 500, "text/plain", response);
+                    bool success = HyperDbgInterpreter(
+                            cmd.data());//response string in logCallback packet,所以执行返回0和1不重要，直接忽略，去收包的地方解析字符串
+//sendHttpResponse(clientSocket, success ? 200 : 500, "text/plain", response);
                 } else if (path == "/VmxSupportDetection") {
                     auto b = VmxSupportDetection();
                     std::string response = b ? "true" : "false";
@@ -422,16 +308,6 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/StopVmmDriver") {
                     bool success = HyperDbgStopVmmDriver();
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
-                } else if (path == "/Interpreter") {
-                    std::string command = queryParams["command"];
-                    if (command.empty()) {
-                        sendHttpResponse(clientSocket, 400, "text/plain", "Missing command parameter");
-                        continue;
-                    }
-
-                    bool success = HyperDbgInterpreter(command.data());
                     std::string response = success ? "true" : "false";
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/TestCommandParser") {

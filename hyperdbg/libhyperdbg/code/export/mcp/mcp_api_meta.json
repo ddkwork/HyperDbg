@@ -42,7 +42,7 @@
     "Type": "CHAR *"
    }
   ],
-  "ReturnType": "INT"
+  "ReturnType": "CHAR *"
  },
  {
   "Name": "HyperDbgTestCommandParser",

@@ -16,6 +16,10 @@ func TestDebug(t *testing.T) {
 	d := sdk.Debugger{}
 	assert.True(t, d.VmxSupportDetection())
 	assert.Equal(t, "GenuineIntel", d.CpuReadVendorString())
+	println(d.RunCommand("xxoo"))
+	if strings.HasPrefix(d.RunCommand("xxoo"), "err") {
+
+	}
 }
 
 /* todo
@@ -134,10 +138,6 @@ func Test_Bind_Go(t *testing.T) {
 			default:
 				callParams += strconv.Quote("todo panic --> unknown param type:" + param.Type)
 				t.Error("unknown param type:", param.Type, " api:", api.Name)
-			}
-			if api.Name == "Interpreter" { //for debug
-				//println()
-				//api.Name = "RunCommand"
 			}
 			if i < len(api.Params) {
 				callParams += ","
@@ -322,14 +322,14 @@ var apis = []ApiMeta{
 		ReturnType: "INT",
 	},
 	{
-		Name: "RunCommand", // RunCommand  HyperDbgInterpreter
+		Name: "RunCommand",
 		Params: []NameType{
 			{
 				Name: "command",
 				Type: "CHAR *",
 			},
 		},
-		ReturnType: "INT",
+		ReturnType: "CHAR *",
 	},
 
 	{

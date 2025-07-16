@@ -30,8 +30,8 @@ func (Debugger) UninstallVmmDriver() int {
 func (Debugger) StopVmmDriver() int {
 	return request[int]("StopVmmDriver", nil)
 }
-func (Debugger) RunCommand(command string) int {
-	return request[int]("RunCommand", map[string]string{"command": command})
+func (Debugger) RunCommand(command string) string {
+	return request[string]("RunCommand", map[string]string{"command": command})
 }
 func (Debugger) TestCommandParser(command string, number_of_tokens uint32, tokens_list []string, failed_token_num uint32, failed_token_position uint32) bool {
 	return request[bool]("TestCommandParser", map[string]string{
