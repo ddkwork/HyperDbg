@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - dev
   workflow_dispatch:
 #  schedule:
 #    - cron: '0 0 * * *'  # 每天自动更新
