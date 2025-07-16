@@ -8,39 +8,39 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 find_package(WDK REQUIRED)
 
-	include_directories(
-	       "dependencies/zydis/include"
-	       "dependencies/zydis/src"
-	       "dependencies/zydis/dependencies/zycore/include"
-	)
+include_directories(
+        "dependencies/zydis/include"
+        "dependencies/zydis/src"
+        "dependencies/zydis/dependencies/zycore/include"
+)
 
-	file(GLOB ZydisSourceFiles "dependencies/zydis/src/*.c")
-	file(GLOB ZycoreSourceFiles "dependencies/zydis/dependencies/zycore/src/*.c")
+file(GLOB ZydisSourceFiles "dependencies/zydis/src/*.c")
+file(GLOB ZycoreSourceFiles "dependencies/zydis/dependencies/zycore/src/*.c")
 
-	set(SourceFiles
-	       ${ZydisSourceFiles}
-	       ${ZycoreSourceFiles}
-	       #        examples/ZydisWinKernel.c
-	)
+set(SourceFiles
+        ${ZydisSourceFiles}
+        ${ZycoreSourceFiles}
+        #        examples/ZydisWinKernel.c
+)
 
-	add_library(zydis STATIC ${SourceFiles})
-	target_compile_definitions(zydis PUBLIC
-	       -UZYAN_NO_LIBC
-	       -UZYDIS_NO_LIBC
-	       -DZYCORE_STATIC_BUILD
-	       -DZYDIS_STATIC_BUILD
-	)
+add_library(zydis STATIC ${SourceFiles})
+target_compile_definitions(zydis PUBLIC
+        -UZYAN_NO_LIBC
+        -UZYDIS_NO_LIBC
+        -DZYCORE_STATIC_BUILD
+        -DZYDIS_STATIC_BUILD
+)
 
-	wdk_add_library(zydisKernel
-	       KMDF 1.15
-	       ${SourceFiles}
-	)
-	target_compile_definitions(zydisKernel PUBLIC
-     	       -DZYAN_NO_LIBC
-     	       -DZYDIS_NO_LIBC
-     	       -DZYCORE_STATIC_BUILD
-     	       -DZYDIS_STATIC_BUILD
-     	)
+wdk_add_library(zydisKernel
+        KMDF 1.15
+        ${SourceFiles}
+)
+target_compile_definitions(zydisKernel PUBLIC
+        -DZYAN_NO_LIBC
+        -DZYDIS_NO_LIBC
+        -DZYCORE_STATIC_BUILD
+        -DZYDIS_STATIC_BUILD
+)
 link_directories(libraries/kdserial/x64)
 add_subdirectory(kdserial)
 target_link_libraries(kdserial kdserialtransport kdhv kdtelemetry WDK::NTOSKRNL WDK::HAL)
@@ -55,7 +55,7 @@ target_link_libraries(hyperevade WDK::NTOSKRNL WDK::HAL)
 
 link_directories(libraries/zydis/kernel)
 add_subdirectory(hyperhv)
-target_link_libraries(hyperhv zydisKernel hyperevade   WDK::NTOSKRNL WDK::HAL)
+target_link_libraries(hyperhv zydisKernel hyperevade WDK::NTOSKRNL WDK::HAL)
 
 
 add_subdirectory(hyperkd)
@@ -74,7 +74,7 @@ target_link_libraries(script_engine symbol_parser)
 #add_subdirectory(keystone)
 add_subdirectory(libhyperdbg)
 #target_link_libraries(libhyperdbg zydis script_engine keystone  )
-target_link_libraries(libhyperdbg zydis script_engine ${CMAKE_SOURCE_DIR}/keystone.lib  )
+target_link_libraries(libhyperdbg zydis script_engine ${CMAKE_SOURCE_DIR}/keystone.lib)
 
 add_subdirectory(hyperdbg-test)
 target_link_libraries(hyperdbg_test libhyperdbg)
