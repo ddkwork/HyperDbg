@@ -1159,6 +1159,7 @@ func LayoutDisassemblyTable() ux.Widget {
 				if !d.VmxSupportDetection() {
 					panic("vmx not support")
 				}
+				mylog.Success("vmx support detected")
 				t.SetRootRowsCallBack()
 
 				d.ConnectLocalDebugger()
