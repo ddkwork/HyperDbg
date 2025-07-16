@@ -1,5 +1,5 @@
-//#define WINSOCK_DEPRECATED_NO_WARNINGS
-//#define WIN32_LEAN_AND_MEAN
+// +build ignore
+
 #include "mcp.h"
 
 #include <iomanip>  // For std::setw and std::setfill
@@ -173,8 +173,6 @@ std::string urlDecode(const std::string &str) {
 
 // HTTP server thread function using standard Winsock
 DWORD WINAPI HttpServerThread(LPVOID lpParam) {
-//    printf("stop HttpServer called");
-//    return 0;
     WSADATA wsaData;
     int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (result != 0) {

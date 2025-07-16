@@ -50,8 +50,8 @@ type Type interface {
 type void any
 
 func request[T Type](endpoint string, params map[string]string) T {
-	x64dbgServerURL := DefaultHyperdbgServer
-	url := x64dbgServerURL + endpoint
+	hyperdbgServerURL := DefaultHyperdbgServer
+	url := hyperdbgServerURL + endpoint
 
 	// 添加查询参数
 	if len(params) > 0 {
