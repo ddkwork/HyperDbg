@@ -45,8 +45,8 @@ func (Debugger) TestCommandParser(command string, number_of_tokens uint32, token
 func (Debugger) TestCommandParserShowTokens(command string) {
 	request[void]("TestCommandParserShowTokens", map[string]string{"command": command})
 }
-func (Debugger) ShowSignature() {
-	request[void]("ShowSignature", nil)
+func (Debugger) ShowSignature() string {
+	return request[string]("ShowSignature", nil)
 }
 func (Debugger) ScriptReadFileAndExecuteCommandline(argc int, argv string) int {
 	return request[int]("ScriptReadFileAndExecuteCommandline", map[string]string{

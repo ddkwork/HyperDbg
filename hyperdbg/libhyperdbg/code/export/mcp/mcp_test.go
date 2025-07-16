@@ -16,7 +16,7 @@ func TestDebug(t *testing.T) {
 	d := sdk.Debugger{}
 	assert.True(t, d.VmxSupportDetection())
 	assert.Equal(t, "GenuineIntel", d.CpuReadVendorString())
-	d.ShowSignature()
+	println(d.ShowSignature())
 	d.RunCommand("xxoo")
 }
 
@@ -370,7 +370,7 @@ var apis = []ApiMeta{
 	{
 		Name:       "HyperDbgShowSignature",
 		Params:     nil,
-		ReturnType: "VOID",
+		ReturnType: "CHAR *",
 	},
 	{
 		Name: "ScriptReadFileAndExecuteCommandline",

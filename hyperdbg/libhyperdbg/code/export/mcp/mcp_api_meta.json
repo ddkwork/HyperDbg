@@ -83,7 +83,7 @@
  {
   "Name": "HyperDbgShowSignature",
   "Params": null,
-  "ReturnType": "VOID"
+  "ReturnType": "CHAR *"
  },
  {
   "Name": "ScriptReadFileAndExecuteCommandline",
