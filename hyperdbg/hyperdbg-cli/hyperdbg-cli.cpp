@@ -38,6 +38,7 @@ int
 main(int argc, char * argv[])
 {
     startHttpServer();
+
     BOOLEAN exit_from_debugger = FALSE;
     string  previous_command;
     BOOLEAN reset = FALSE;

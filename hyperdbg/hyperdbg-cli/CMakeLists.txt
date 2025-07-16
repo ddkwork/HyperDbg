@@ -8,3 +8,9 @@ include_directories(
         "../dependencies"
 )
 add_executable(hyperdbg_cli ${SourceFiles})
+
+add_custom_command(TARGET hyperdbg_cli POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_SOURCE_DIR}/copybin" go run .
+        COMMENT "执行 Go 程序复制文件到 hyperdbg-cli"
+        VERBATIM
+)
