@@ -173,9 +173,14 @@ std::string urlDecode(const std::string &str) {
 
 SOCKET clientSocket;
 
-int logCallback(const char *Text) {//todo need websocket?
-    printf("%s", Text);
-    sendHttpResponse(clientSocket, 200, "text/plain", Text);
+int logCallback(const char *message) {//todo need websocket?
+    printf("%s", message);
+    auto statusCode = 200;
+    if (strings::HasPrefix(message, "err"))
+        statusCode = 500;
+    if (strings::HasPrefix(message, "Missing"))
+        statusCode = 400;
+    sendHttpResponse(clientSocket, statusCode, "text/plain", message);
     return 0;
 }
 
