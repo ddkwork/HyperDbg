@@ -1,7 +1,7 @@
 initial commit.cmd
-#ignore clion config files
 .idea
 cmake-build-debug
+cmake-build-release
 /hyperdbg/keystone_debug.lib
 
 ## Ignore Visual Studio temporary files, build results, and

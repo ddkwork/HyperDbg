@@ -2,6 +2,10 @@
 set(SourceFiles
         "main.cpp"
 )
+include_directories(
+        "../include"
+        "../dependencies"
+)
 add_executable(debugger_server ${SourceFiles})
 
 add_custom_command(TARGET debugger_server POST_BUILD
