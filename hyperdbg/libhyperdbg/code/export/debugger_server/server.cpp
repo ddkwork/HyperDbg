@@ -107,7 +107,7 @@ void plugsetup() { pluginSetup(); }
 
 // Start the HTTP server
 bool startHttpServer() {
-    printf("starting http server...");
+    printf("starting http server...\n");
 //    std::lock_guard<std::mutex> lock(g_httpMutex);
 
 //     Stop existing server if running
