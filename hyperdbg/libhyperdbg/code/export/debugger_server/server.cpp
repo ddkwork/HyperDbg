@@ -209,7 +209,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
     serverAddr.sin_port = htons((u_short) g_httpPort);
 
     // Bind the socket
-    if (::bind(g_serverSocket, (sockaddr * ) & serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
+    if (::bind(g_serverSocket, (sockaddr *) &serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
         printf("Bind failed with error: %d\n", WSAGetLastError());
         closesocket(g_serverSocket);
         WSACleanup();
@@ -237,7 +237,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
         // Accept a client connection
         sockaddr_in clientAddr;
         int clientAddrSize = sizeof(clientAddr);
-        clientSocket = accept(g_serverSocket, (sockaddr * ) & clientAddr, &clientAddrSize);
+        clientSocket = accept(g_serverSocket, (sockaddr *) &clientAddr, &clientAddrSize);
 
         if (clientSocket == INVALID_SOCKET) {
             // Check if we need to exit
@@ -309,28 +309,16 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                         continue;
                     }
                     HyperDbgTestCommandParserShowTokens(command.data());
-                } else if (path == "/ScriptReadFileAndExecuteCommandline") {
-                    int argc = std::stoi(queryParams["argc"]);
-                    std::string argv = queryParams["argv"];
-                    if (argv.empty()) {
-                        sendHttpResponse(clientSocket, 400, "text/plain", "Missing argv parameter");
-                        continue;
-                    }
-
-//                    auto success = ScriptReadFileAndExecuteCommandline(argc, argv.c_str());
-                    auto success = false;
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/ContinuePreviousCommand") {
-                    bool success = ContinuePreviousCommand();
-                    std::string response = success ? "true" : "false";
+                    std::string response = ContinuePreviousCommand() ? "true" : "false";
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/CheckMultilineCommand") {
                     std::string current_command = queryParams["current_command"];
-                    auto reset = std::stoi(queryParams["reset"]);
-                    auto success = CheckMultilineCommand(current_command.data(), reset);
-                    std::string response = success ? "true" : "false";
+                    auto reset = std::stoi(queryParams["reset"]);//todo convert to bool
+                    std::string response = CheckMultilineCommand(current_command.data(), reset) ? "true" : "false";
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
+                } else if (path == "ConnectLocalDebugger") {
+                    ConnectLocalDebugger();
                 } else if (path == "/ConnectRemoteDebugger") {
                     std::string ip = queryParams["ip"];
                     std::string port1 = queryParams["port"];
@@ -338,11 +326,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                         sendHttpResponse(clientSocket, 400, "text/plain", "Missing ip or port parameter");
                         continue;
                     }
-
-                    auto success = ConnectRemoteDebugger(ip.c_str(), port1.c_str());
-//                    auto success = ConnectRemoteDebugger(ip.c_str(), std::stoi(port));
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
+                    ConnectRemoteDebugger(ip.c_str(), port1.c_str());
                 } else if (path == "/ReadMemory") {
                     std::string target_address = queryParams["target_address"];
                     std::string memory_type = queryParams["memory_type"];
@@ -426,12 +410,11 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
 //                }
 //                else if (path == "RunCommand") {
 //                }
-  else if (path == "TestCommandParserShowTokens") {
+                else if (path == "TestCommandParserShowTokens") {
                 } else if (path == "ShowSignature") {
                 } else if (path == "ScriptReadFileAndExecuteCommandline") {
                 } else if (path == "ContinuePreviousCommand") {
                 } else if (path == "CheckMultilineCommand") {
-                } else if (path == "ConnectLocalDebugger") {
                 } else if (path == "ConnectRemoteDebugger") {
                 } else if (path == "Continue") {
                 } else if (path == "Pause") {
