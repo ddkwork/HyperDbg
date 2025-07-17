@@ -1,6 +1,0 @@
-go 1.25rc1
-
-use (
-	.
-	./HyperDbg
-)
