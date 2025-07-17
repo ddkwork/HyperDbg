@@ -10,10 +10,10 @@ import (
 
 func main() {
 	root := "../cmake-build-release"
-	cliDir := filepath.Join(root, "hyperdbg-cli")
+	cliDir := filepath.Join(root, "debugger_server")
 	var bins []string
 	filepath.Walk(root, func(path string, info fs.FileInfo, err error) error {
-		if strings.Contains(path, "hyperdbg-cli") {
+		if strings.Contains(path, "debugger_server") {
 			return err
 		}
 		switch filepath.Ext(path) {

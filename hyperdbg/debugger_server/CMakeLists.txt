@@ -6,6 +6,6 @@ add_executable(debugger_server ${SourceFiles})
 
 add_custom_command(TARGET debugger_server POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_SOURCE_DIR}/copybin" go run .
-        COMMENT "执行 Go 程序复制文件到 hyperdbg-cli"
+        COMMENT "执行 Go 程序复制文件到 debugger_server"
         VERBATIM
 )
