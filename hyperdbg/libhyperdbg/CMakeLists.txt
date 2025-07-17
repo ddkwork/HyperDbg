@@ -169,8 +169,8 @@ set(SourceFiles
         "pci-id.cpp"
         "pcicam.cpp"
         "code/assembly/asm-vmx-checks.asm"
-        code/export/mcp/mcp.cpp
-        code/export/mcp/mcp.h
+        code/export/debugger_server/server.cpp
+        code/export/debugger_server/server.h
 )
 include_directories(
         "../dependencies"

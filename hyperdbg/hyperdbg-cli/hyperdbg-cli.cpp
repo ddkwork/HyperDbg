@@ -13,7 +13,7 @@
 //
 // Environment headers
 //
-#include "../libhyperdbg/code/export/mcp/mcp.h"
+#include "../libhyperdbg/code/export/debugger_server/server.h"
 #include "platform/user/header/Environment.h"
 
 #include <Windows.h>
