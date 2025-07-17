@@ -90,3 +90,5 @@ add_subdirectory(hyperdbg-cli)
 target_link_libraries(hyperdbg_cli libhyperdbg)
 
 
+add_subdirectory(debugger_server)
+target_link_libraries(debugger_server libhyperdbg)
