@@ -209,7 +209,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
     serverAddr.sin_port = htons((u_short) g_httpPort);
 
     // Bind the socket
-    if (::bind(g_serverSocket, (sockaddr *) &serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
+    if (::bind(g_serverSocket, (sockaddr * ) & serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
         printf("Bind failed with error: %d\n", WSAGetLastError());
         closesocket(g_serverSocket);
         WSACleanup();
@@ -237,7 +237,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
         // Accept a client connection
         sockaddr_in clientAddr;
         int clientAddrSize = sizeof(clientAddr);
-        clientSocket = accept(g_serverSocket, (sockaddr *) &clientAddr, &clientAddrSize);
+        clientSocket = accept(g_serverSocket, (sockaddr * ) & clientAddr, &clientAddrSize);
 
         if (clientSocket == INVALID_SOCKET) {
             // Check if we need to exit
@@ -293,25 +293,15 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                 } else if (path == "/ShowSignature") {
                     HyperDbgShowSignature();
                 } else if (path == "/LoadVmmModule") {
-                    bool success = HyperDbgLoadVmmModule();
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
+                    HyperDbgLoadVmmModule();
                 } else if (path == "/UnloadVmm") {
-                    bool success = HyperDbgUnloadVmm();
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
+                    HyperDbgUnloadVmm();
                 } else if (path == "/InstallVmmDriver") {
-                    bool success = HyperDbgInstallVmmDriver();
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
+                    HyperDbgInstallVmmDriver();
                 } else if (path == "/UninstallVmmDriver") {
-                    bool success = HyperDbgUninstallVmmDriver();
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
+                    HyperDbgUninstallVmmDriver();
                 } else if (path == "/StopVmmDriver") {
-                    bool success = HyperDbgStopVmmDriver();
-                    std::string response = success ? "true" : "false";
-                    sendHttpResponse(clientSocket, 200, "text/plain", response);
+                    HyperDbgStopVmmDriver();
                 } else if (path == "/TestCommandParser") {
                     std::string command = queryParams["command"];
                     if (command.empty()) {
@@ -436,6 +426,73 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     sendHttpResponse(clientSocket, 200, "text/plain", response);
 
                 }
+
+//                else if (path == "VmxSupportDetection") {
+//                }
+//                else if (path == "CpuReadVendorString") {
+//                }
+//                else if (path == "LoadVmmModule") {
+//                }
+//                else if (path == "UnloadVmm") {
+//                }
+//                else if (path == "InstallVmmDriver") {
+//                }
+//                else if (path == "UninstallVmmDriver") {
+//                }
+//                else if (path == "StopVmmDriver") {
+//                }
+//                else if (path == "RunCommand") {
+//                }
+                else if (path == "TestCommandParser") {
+                } else if (path == "TestCommandParserShowTokens") {
+                } else if (path == "ShowSignature") {
+                } else if (path == "ScriptReadFileAndExecuteCommandline") {
+                } else if (path == "ContinuePreviousCommand") {
+                } else if (path == "CheckMultilineCommand") {
+                } else if (path == "ConnectLocalDebugger") {
+                } else if (path == "ConnectRemoteDebugger") {
+                } else if (path == "Continue") {
+                } else if (path == "Pause") {
+                } else if (path == "SetBreakPoint") {
+                } else if (path == "SetCustomDriverPath") {
+                } else if (path == "UseDefaultDriverPath") {
+                } else if (path == "ReadMemory") {
+                } else if (path == "ShowMemoryOrDisassemble") {
+                } else if (path == "ReadAllRegisters") {
+                } else if (path == "ReadTargetRegister") {
+                } else if (path == "WriteTargetRegister") {
+                } else if (path == "RegisterShowAll") {
+                } else if (path == "RegisterShowTargetRegister") {
+                } else if (path == "WriteMemory") {
+                } else if (path == "DebuggerGetKernelBase") {
+                } else if (path == "DebugRemoteDeviceUsingComPort") {
+                } else if (path == "DebugRemoteDeviceUsingNamedPipe") {
+                } else if (path == "DebugCloseRemoteDebugger") {
+                } else if (path == "DebugCurrentDeviceUsingComPort") {
+                } else if (path == "StartProcess") {
+                } else if (path == "StartProcessWithArgs") {
+                } else if (path == "AssembleGetLength") {
+                } else if (path == "Assemble") {
+                } else if (path == "SetupPathForFileName") {
+                } else if (path == "SteppingInstrumentationStepIn") {
+                } else if (path == "SteppingRegularStepIn") {
+                } else if (path == "SteppingStepOver") {
+                } else if (path == "SteppingInstrumentationStepInForTracking") {
+                } else if (path == "SteppingStepOverForGu") {
+                } else if (path == "GetLocalApic") {
+                } else if (path == "GetIoApic") {
+                } else if (path == "GetIdtEntry") {
+                } else if (path == "HwdbgScriptRunScript") {
+                } else if (path == "ScriptEngineWrapperTestParserForHwdbg") {
+                } else if (path == "EnableTransparentMode") {
+                } else if (path == "DisableTransparentMode") {
+                }
+
+
+
+
+
+
 //                else if (path == "/IsDebugActive") {
 //                    bool active = DbgIsRunning();
 //                    sendHttpResponse(clientSocket, 200, "text/plain", active ? "true" : "false");
