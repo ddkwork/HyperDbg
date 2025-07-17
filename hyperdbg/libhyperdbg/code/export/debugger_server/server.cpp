@@ -302,30 +302,13 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
                     HyperDbgUninstallVmmDriver();
                 } else if (path == "/StopVmmDriver") {
                     HyperDbgStopVmmDriver();
-                } else if (path == "/TestCommandParser") {
-                    std::string command = queryParams["command"];
-                    if (command.empty()) {
-                        sendHttpResponse(clientSocket, 400, "text/plain", "Missing command parameter");
-                        continue;
-                    }
-
-                    int number_of_tokens = std::stoi(queryParams["number_of_tokens"]);
-                    std::string tokens_list = queryParams["tokens_list"];
-                    int failed_token_num = std::stoi(queryParams["failed_token_num"]);
-                    int failed_token_position = std::stoi(queryParams["failed_token_position"]);
-
-//                    bool success = HyperDbgTestCommandParser(command.c_str(), number_of_tokens, tokens_list.c_str(), failed_token_num, failed_token_position);
-//                    std::string response = success ? "true" : "false";
-//                    sendHttpResponse(clientSocket, 200, "text/plain", response);
                 } else if (path == "/TestCommandParserShowTokens") {
                     std::string command = queryParams["command"];
                     if (command.empty()) {
                         sendHttpResponse(clientSocket, 400, "text/plain", "Missing command parameter");
                         continue;
                     }
-
                     HyperDbgTestCommandParserShowTokens(command.data());
-                    sendHttpResponse(clientSocket, 200, "text/plain", "OK");
                 } else if (path == "/ScriptReadFileAndExecuteCommandline") {
                     int argc = std::stoi(queryParams["argc"]);
                     std::string argv = queryParams["argv"];
@@ -443,8 +426,7 @@ DWORD WINAPI HttpServerThread(LPVOID lpParam) {
 //                }
 //                else if (path == "RunCommand") {
 //                }
-                else if (path == "TestCommandParser") {
-                } else if (path == "TestCommandParserShowTokens") {
+  else if (path == "TestCommandParserShowTokens") {
                 } else if (path == "ShowSignature") {
                 } else if (path == "ScriptReadFileAndExecuteCommandline") {
                 } else if (path == "ContinuePreviousCommand") {
