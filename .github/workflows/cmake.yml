@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hyperdbg-binaries
-          path: hyperdbg/cmake-build-release/debugger_server
+          path: hyperdbg/cmake-build-release/debugger_server/Release  #todo if use ninja need upload all directory
           if-no-files-found: warn
           retention-days: 1
 
